@@ -6,6 +6,11 @@
 			service: 'facebook'
 			url: "https://graph.facebook.com/#{user.services.facebook.id}/picture?type=large"
 
+	if user.services.dolphin?.id? and RocketChat.settings.get 'Accounts_OAuth_Dolphin'
+		avatars.push
+			service: 'dolphin'
+			url: user.services.dolphin.picture
+
 	if user.services.google?.picture? and user.services.google.picture isnt "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg" and RocketChat.settings.get 'Accounts_OAuth_Google'
 		avatars.push
 			service: 'google'

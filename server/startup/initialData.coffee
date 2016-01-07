@@ -39,6 +39,8 @@ Meteor.startup ->
 								verified: true
 							],
 							name: 'Admin'
+							username: 'Admin',
+							active: 1
 
 						Accounts.setPassword id, process.env.ADMIN_PASS
 						RocketChat.authz.addUsersToRoles( id, 'admin')

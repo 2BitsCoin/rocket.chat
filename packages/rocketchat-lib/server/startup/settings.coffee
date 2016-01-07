@@ -5,9 +5,9 @@ if not RocketChat.models.Settings.findOneById 'uniqueID'
 RocketChat.settings.addGroup 'Accounts', ->
 	@add 'Accounts_AllowUserProfileChange', true, { type: 'boolean', public: true }
 	@add 'Accounts_AllowUserAvatarChange', true, { type: 'boolean', public: true }
-	@add 'Accounts_AllowUsernameChange', true, { type: 'boolean', public: true }
-	@add 'Accounts_AllowPasswordChange', true, { type: 'boolean', public: true }
-	@add 'Accounts_RequireNameForSignUp', true, { type: 'boolean', public: true }
+	@add 'Accounts_AllowUsernameChange', false, { type: 'boolean', public: true }
+	@add 'Accounts_AllowPasswordChange', false, { type: 'boolean', public: true }
+	@add 'Accounts_RequireNameForSignUp', false, { type: 'boolean', public: true }
 	@add 'Accounts_LoginExpiration', 90, { type: 'int', public: true }
 	@add 'Accounts_ShowFormLogin', true, { type: 'boolean', public: true }
 
@@ -15,11 +15,11 @@ RocketChat.settings.addGroup 'Accounts', ->
 		@add 'Accounts_EmailVerification', false, { type: 'boolean', public: true }
 		@add 'Accounts_ManuallyApproveNewUsers', false, { type: 'boolean' }
 		@add 'Accounts_AllowedDomainsList', '', { type: 'string', public: true }
-		@add 'Accounts_RegistrationForm', 'Public', { type: 'select', public: true, values: [ { key: 'Public', i18nLabel: 'Accounts_RegistrationForm_Public' }, { key: 'Disabled', i18nLabel: 'Accounts_RegistrationForm_Disabled' }, { key: 'Secret URL', i18nLabel: 'Accounts_RegistrationForm_Secret_URL' } ] }
+		@add 'Accounts_RegistrationForm', 'Disabled', { type: 'select', public: true, values: [ { key: 'Public', i18nLabel: 'Accounts_RegistrationForm_Public' }, { key: 'Disabled', i18nLabel: 'Accounts_RegistrationForm_Disabled' }, { key: 'Secret URL', i18nLabel: 'Accounts_RegistrationForm_Secret_URL' } ] }
 		@add 'Accounts_RegistrationForm_SecretURL', Random.id(), { type: 'string' }
 		@add 'Accounts_RegistrationForm_LinkReplacementText', 'New user registration is currently disabled', { type: 'string', public: true }
 		@add 'Accounts_Registration_AuthenticationServices_Enabled', true, { type: 'boolean', public: true }
-		@add 'Accounts_PasswordReset', true, { type: 'boolean', public: true }
+		@add 'Accounts_PasswordReset', false, { type: 'boolean', public: true }
 
 	@section 'Avatar', ->
 		@add 'Accounts_AvatarResize', true, { type: 'boolean' }
@@ -147,7 +147,7 @@ RocketChat.settings.addGroup 'Push', ->
 
 
 RocketChat.settings.addGroup 'Layout', ->
-	@add 'Layout_Sidenav_Footer', '<div><a href="https://github.com/RocketChat/Rocket.Chat" class="logo" target="_blank"> <img src="/images/logo/logo.svg?v=3" /></a><div class="github-tagline"><span class="octicon octicon-pencil" style="color: #994C00"></span> with <span class="octicon octicon-heart" style="color: red"></span> on <span class="octicon octicon-mark-github"></span></div></div>', { type: 'string', public: true, i18nDescription: 'Layout_Sidenav_Footer_description' }
+	@add 'Layout_Sidenav_Footer', '', { type: 'string', public: true, i18nDescription: 'Layout_Sidenav_Footer_description' }
 
 	@section 'Content', ->
 		@add 'Layout_Home_Title', 'Home', { type: 'string', public: true }
@@ -157,7 +157,7 @@ RocketChat.settings.addGroup 'Layout', ->
 
 	@section 'Login', ->
 		@add 'Layout_Login_Header', '<a class="logo" href="/"><img src="/images/logo/logo.svg?v=3" /></a>', { type: 'string', multiline: true, public: true }
-		@add 'Layout_Login_Terms', 'By proceeding to create your account and use Rocket.Chat, you are agreeing to our <a href="/terms-of-service">Terms of Service</a> and <a href="/privacy-policy">Privacy Policy</a>. If you do not agree, you cannot use Rocket.Chat.', { type: 'string', multiline: true, public: true }
+		@add 'Layout_Login_Terms', '', { type: 'string', multiline: true, public: true }
 
 
 RocketChat.settings.add 'Statistics_opt_out', false, { type: 'boolean', group: false }

@@ -71,6 +71,7 @@
 						{{#if suggestions.ready}}
 							{{> avatarSuggestion suggestions.avatars.gravatar}}
 							{{> avatarSuggestion suggestions.avatars.facebook}}
+							{{> avatarSuggestion suggestions.avatars.dolphin}}
 							{{> avatarSuggestion suggestions.avatars.google}}
 							{{> avatarSuggestion suggestions.avatars.github}}
 							{{> avatarSuggestion suggestions.avatars.gitlab}}
@@ -79,6 +80,9 @@
 
 							{{#if suggestAvatar 'facebook'}}
 								{{> avatarSuggestionLogin 'facebook'}}
+							{{/if}}
+							{{#if suggestAvatar 'dolphin'}}
+								{{> avatarSuggestionLogin 'dolphin'}}
 							{{/if}}
 							{{#if suggestAvatar 'google'}}
 								{{> avatarSuggestionLogin 'google'}}
