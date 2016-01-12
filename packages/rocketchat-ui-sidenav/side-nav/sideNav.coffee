@@ -6,8 +6,15 @@ Template.sideNav.helpers
 		return SideNav.getFlex().data
 
 	footer: ->
-		return RocketChat.settings.get 'Layout_Sidenav_Footer'
-
+		sSiteName = RocketChat.settings.get 'Site_Name'
+		sDolphinUrl = RocketChat.settings.get 'API_Dolphin_URL'
+		sSideNavFooter = RocketChat.settings.get 'Layout_Sidenav_Footer'
+		if sSideNavFooter.length
+			return sSideNavFooter
+		else if sDolphinUrl.length
+			sTextColor = RocketChat.settings.get 'theme-color-quaternary-font-color'
+			'<div style="height:50%; width:100%; position:relative;"><a style="display:block; text-align:center; width:100%; position:absolute; bottom:0; right:0; line-height:0; color:' + sTextColor + '" href="' + sDolphinUrl + '" target="_blank">' + t("Goto_main_site") + '</a></div>'
+			
 	showStarredRooms: ->
 		favoritesEnabled = !RocketChat.settings.get 'Disable_Favorite_Rooms'
 		hasFavoriteRoomOpened = ChatSubscription.findOne({ f: true, open: true })

@@ -113,8 +113,12 @@ class CustomOAuth
 				options:
 					profile:
 						name: identity.name or identity.username or identity.nickname
+						globalRoles: [ "admin" ]
+						roles: 
+							__global_roles__: [ "admin" ]
 
 			console.log data
+
 
 			return data
 

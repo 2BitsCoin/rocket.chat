@@ -72,7 +72,7 @@ RocketChat.settings.addGroup 'FileUpload', ->
 
 RocketChat.settings.addGroup 'General', ->
 	@add 'Site_Url', __meteor_runtime_config__?.ROOT_URL, { type: 'string', i18nDescription: 'Site_Url_Description', public: true }
-	@add 'Site_Name', 'Rocket.Chat', { type: 'string', public: true }
+	@add 'Site_Name', 'Chat+', { type: 'string', public: true }
 	@add 'Language', '', { type: 'language', public: true }
 	@add 'Allow_Invalid_SelfSigned_Certs', false, { type: 'boolean' }
 	@add 'Disable_Favorite_Rooms', false, { type: 'boolean' }
@@ -100,8 +100,8 @@ RocketChat.settings.addGroup 'SMTP', ->
 	@add 'SMTP_Test_Button', 'sendSMTPTestEmail', { type: 'action', actionText: 'Send_a_test_mail_to_my_user' }
 
 	@section 'Invitation', ->
-		@add 'Invitation_Subject', 'You have been invited to Rocket.Chat', { type: 'string' }
-		@add 'Invitation_HTML', '<h2>You have been invited to <h1>Rocket.Chat</h1></h2><p>Go to ' + __meteor_runtime_config__?.ROOT_URL + ' and try the best open source chat solution available today!</p>', { type: 'string', multiline: true }
+		@add 'Invitation_Subject', 'You have been invited to Chat', { type: 'string' }
+		@add 'Invitation_HTML', '<h2>You have been invited to <h1>Chat</h1></h2><p>Go to ' + __meteor_runtime_config__?.ROOT_URL + ' and try the best open source chat solution available today!</p>', { type: 'string', multiline: true }
 		@add 'Accounts_Enrollment_Email',  '', { type: 'string', multiline: true }
 
 
@@ -151,12 +151,12 @@ RocketChat.settings.addGroup 'Layout', ->
 
 	@section 'Content', ->
 		@add 'Layout_Home_Title', 'Home', { type: 'string', public: true }
-		@add 'Layout_Home_Body', 'Welcome to Rocket.Chat <br> Go to APP SETTINGS -> Layout to customize this intro.', { type: 'string', multiline: true, public: true }
+		@add 'Layout_Home_Body', 'Welcome to Chat <br> Go to APP SETTINGS -> Layout to customize this intro.', { type: 'string', multiline: true, public: true }
 		@add 'Layout_Terms_of_Service', 'Terms of Service <br> Go to APP SETTINGS -> Layout to customize this page.', { type: 'string', multiline: true, public: true }
 		@add 'Layout_Privacy_Policy', 'Privacy Policy <br> Go to APP SETTINGS -> Layout to customize this page.', { type: 'string', multiline: true, public: true }
 
 	@section 'Login', ->
-		@add 'Layout_Login_Header', '<a class="logo" href="/"><img src="/images/logo/logo.svg?v=3" /></a>', { type: 'string', multiline: true, public: true }
+		@add 'Layout_Login_Header', '', { type: 'string', multiline: true, public: true }
 		@add 'Layout_Login_Terms', '', { type: 'string', multiline: true, public: true }
 
 
