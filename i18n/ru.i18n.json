@@ -116,6 +116,7 @@
   "github_no_public_email" : "В настройках GitHub отсутствует публично доступный e-mail",
   "Give_a_unique_name_for_the_custom_oauth" : "Задайте уникальное имя для пользовательского OAuth",
   "Give_the_application_a_name_This_will_be_seen_by_your_users" : "Задайте приложению имя. Оно будет видно всем пользователям.",
+  "Goto_main_site": "Main site",
   "Has_more" : "Еще",
   "Have_your_own_chat" : "Создайте свой веб чат. Разработанный на основе Meteor.com Rocket.Chat это отличное решение для разработчкиков, которые хотят создать свою собственную платформу для общения.",
   "Hide_room" : "Скрыть чат",
