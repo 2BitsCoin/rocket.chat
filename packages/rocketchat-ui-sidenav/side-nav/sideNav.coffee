@@ -21,6 +21,15 @@ Template.sideNav.helpers
 
 		return true if favoritesEnabled and hasFavoriteRoomOpened
 
+	roomType: ->
+		return RocketChat.roomTypes.getTypes()
+
+	canShowRoomType: ->
+		return RocketChat.roomTypes.checkCondition(@)
+
+	templateName: ->
+		return @template
+
 Template.sideNav.events
 	'click .close-flex': ->
 		SideNav.closeFlex()
@@ -43,10 +52,3 @@ Template.sideNav.onRendered ->
 
 	Meteor.defer ->
 		menu.updateUnreadBars()
-
-	wrapper = $('.rooms-list .wrapper').get(0)
-	lastLink = $('.rooms-list h3.history-div').get(0)
-
-	RocketChat.roomTypes.getTypes().forEach (roomType) ->
-		if Template[roomType.template]?
-			Blaze.render Template[roomType.template], wrapper, lastLink
