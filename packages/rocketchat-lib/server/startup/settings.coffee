@@ -17,7 +17,7 @@ RocketChat.settings.addGroup 'Accounts', ->
 		@add 'Accounts_AllowedDomainsList', '', { type: 'string', public: true }
 		@add 'Accounts_RegistrationForm', 'Disabled', { type: 'select', public: true, values: [ { key: 'Public', i18nLabel: 'Accounts_RegistrationForm_Public' }, { key: 'Disabled', i18nLabel: 'Accounts_RegistrationForm_Disabled' }, { key: 'Secret URL', i18nLabel: 'Accounts_RegistrationForm_Secret_URL' } ] }
 		@add 'Accounts_RegistrationForm_SecretURL', Random.id(), { type: 'string' }
-		@add 'Accounts_RegistrationForm_LinkReplacementText', 'New user registration is currently disabled', { type: 'string', public: true }
+		@add 'Accounts_RegistrationForm_LinkReplacementText', '', { type: 'string', public: true }
 		@add 'Accounts_Registration_AuthenticationServices_Enabled', true, { type: 'boolean', public: true }
 		@add 'Accounts_PasswordReset', false, { type: 'boolean', public: true }
 
