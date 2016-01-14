@@ -12,8 +12,7 @@ Template.sideNav.helpers
 		if sSideNavFooter.length
 			return sSideNavFooter
 		else if sDolphinUrl.length
-			sTextColor = RocketChat.settings.get 'theme-color-quaternary-font-color'
-			'<div style="height:50%; width:100%; position:relative;"><a style="display:block; text-align:center; width:100%; position:absolute; bottom:0; right:0; line-height:0; color:' + sTextColor + '" href="' + sDolphinUrl + '" target="_blank">' + t("Goto_main_site") + '</a></div>'
+			'<div style="height:50%; width:100%; position:relative;"><a style="display:block; text-align:center; width:100%; position:absolute; bottom:0; right:0; line-height:0;" href="' + sDolphinUrl + '" target="_blank">' + t("Goto_main_site") + '</a></div>'
 			
 	showStarredRooms: ->
 		favoritesEnabled = !RocketChat.settings.get 'Disable_Favorite_Rooms'
