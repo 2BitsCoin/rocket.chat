@@ -6,6 +6,6 @@ Template.loginHeader.helpers
 		if sHeader.length
 			sHeader
 		else if sDolphinUrl.length 
-			'<a href="/"><img src="' + sDolphinUrl + 'modules/?r=chat_webrtc/logo" onerror="$(this).remove();" /></a>'
+			'<a href="/"><img src="' + sDolphinUrl + 'modules/?r=chat_plus/logo" onerror="$(this).remove();" /></a>'
 		else
 			sSiteName
