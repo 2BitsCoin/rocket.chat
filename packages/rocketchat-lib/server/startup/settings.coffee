@@ -1,25 +1,28 @@
 # Insert server unique id if it doesn't exist
 if not RocketChat.models.Settings.findOneById 'uniqueID'
-	RocketChat.models.Settings.createWithIdAndValue 'uniqueID', Random.id()
+	RocketChat.models.Settings.createWithIdAndValue 'uniqueID', process.env.DEPLOYMENT_ID or Random.id()
 
 RocketChat.settings.addGroup 'Accounts', ->
 	@add 'Accounts_AllowUserProfileChange', true, { type: 'boolean', public: true }
 	@add 'Accounts_AllowUserAvatarChange', true, { type: 'boolean', public: true }
-	@add 'Accounts_AllowUsernameChange', false, { type: 'boolean', public: true }
-	@add 'Accounts_AllowPasswordChange', false, { type: 'boolean', public: true }
-	@add 'Accounts_RequireNameForSignUp', false, { type: 'boolean', public: true }
+	@add 'Accounts_AllowUsernameChange', true, { type: 'boolean', public: true }
+	@add 'Accounts_AllowEmailChange', true, { type: 'boolean', public: true }
+	@add 'Accounts_AllowPasswordChange', true, { type: 'boolean', public: true }
+	@add 'Accounts_RequireNameForSignUp', true, { type: 'boolean', public: true }
 	@add 'Accounts_LoginExpiration', 90, { type: 'int', public: true }
 	@add 'Accounts_ShowFormLogin', true, { type: 'boolean', public: true }
+	@add 'Accounts_EmailOrUsernamePlaceholder', '', { type: 'string', public: true, i18nLabel: 'Placeholder_for_email_or_username_login_field' }
+	@add 'Accounts_PasswordPlaceholder', '', { type: 'string', public: true, i18nLabel: 'Placeholder_for_password_login_field' }
 
 	@section 'Registration', ->
 		@add 'Accounts_EmailVerification', false, { type: 'boolean', public: true }
 		@add 'Accounts_ManuallyApproveNewUsers', false, { type: 'boolean' }
 		@add 'Accounts_AllowedDomainsList', '', { type: 'string', public: true }
-		@add 'Accounts_RegistrationForm', 'Disabled', { type: 'select', public: true, values: [ { key: 'Public', i18nLabel: 'Accounts_RegistrationForm_Public' }, { key: 'Disabled', i18nLabel: 'Accounts_RegistrationForm_Disabled' }, { key: 'Secret URL', i18nLabel: 'Accounts_RegistrationForm_Secret_URL' } ] }
+		@add 'Accounts_RegistrationForm', 'Public', { type: 'select', public: true, values: [ { key: 'Public', i18nLabel: 'Accounts_RegistrationForm_Public' }, { key: 'Disabled', i18nLabel: 'Accounts_RegistrationForm_Disabled' }, { key: 'Secret URL', i18nLabel: 'Accounts_RegistrationForm_Secret_URL' } ] }
 		@add 'Accounts_RegistrationForm_SecretURL', Random.id(), { type: 'string' }
-		@add 'Accounts_RegistrationForm_LinkReplacementText', '', { type: 'string', public: true }
+		@add 'Accounts_RegistrationForm_LinkReplacementText', 'New user registration is currently disabled', { type: 'string', public: true }
 		@add 'Accounts_Registration_AuthenticationServices_Enabled', true, { type: 'boolean', public: true }
-		@add 'Accounts_PasswordReset', false, { type: 'boolean', public: true }
+		@add 'Accounts_PasswordReset', true, { type: 'boolean', public: true }
 
 	@section 'Avatar', ->
 		@add 'Accounts_AvatarResize', true, { type: 'boolean' }
@@ -72,11 +75,12 @@ RocketChat.settings.addGroup 'FileUpload', ->
 
 RocketChat.settings.addGroup 'General', ->
 	@add 'Site_Url', __meteor_runtime_config__?.ROOT_URL, { type: 'string', i18nDescription: 'Site_Url_Description', public: true }
-	@add 'Site_Name', 'Chat+', { type: 'string', public: true }
+	@add 'Site_Name', 'Rocket.Chat', { type: 'string', public: true }
 	@add 'Language', '', { type: 'language', public: true }
 	@add 'Allow_Invalid_SelfSigned_Certs', false, { type: 'boolean' }
 	@add 'Disable_Favorite_Rooms', false, { type: 'boolean' }
 	@add 'CDN_PREFIX', '', { type: 'string' }
+	@add 'Force_SSL', false, { type: 'boolean', public: true }
 	@add 'Debug_Level', 'error', { type: 'select', values: [ { key: 'error', i18nLabel: 'Only_errors' }, { key: 'debug', i18nLabel: 'All_logs' } ] }
 	@add 'Restart', 'restart_server', { type: 'action', actionText: 'Restart_the_server' }
 
@@ -84,6 +88,8 @@ RocketChat.settings.addGroup 'General', ->
 		@add 'UTF8_Names_Validation', '[0-9a-zA-Z-_.]+', { type: 'string', public: true, i18nDescription: 'UTF8_Names_Validation_Description'}
 		@add 'UTF8_Names_Slugify', true, { type: 'boolean', public: true }
 
+	@section 'Reporting', ->
+		@add 'Statistics_opt_out', false, { type: 'boolean', i18nLabel: "Opt_out_statistics" }
 
 RocketChat.settings.addGroup 'API', ->
 	@add 'API_Analytics', '', { type: 'string', public: true }
@@ -100,8 +106,8 @@ RocketChat.settings.addGroup 'SMTP', ->
 	@add 'SMTP_Test_Button', 'sendSMTPTestEmail', { type: 'action', actionText: 'Send_a_test_mail_to_my_user' }
 
 	@section 'Invitation', ->
-		@add 'Invitation_Subject', 'You have been invited to Chat', { type: 'string' }
-		@add 'Invitation_HTML', '<h2>You have been invited to <h1>Chat</h1></h2><p>Go to ' + __meteor_runtime_config__?.ROOT_URL + ' and try the best open source chat solution available today!</p>', { type: 'string', multiline: true }
+		@add 'Invitation_Subject', 'You have been invited to Rocket.Chat', { type: 'string' }
+		@add 'Invitation_HTML', '<h2>You have been invited to <h1>Rocket.Chat</h1></h2><p>Go to ' + __meteor_runtime_config__?.ROOT_URL + ' and try the best open source chat solution available today!</p>', { type: 'string', multiline: true }
 		@add 'Accounts_Enrollment_Email',  '', { type: 'string', multiline: true }
 
 
@@ -147,20 +153,25 @@ RocketChat.settings.addGroup 'Push', ->
 
 
 RocketChat.settings.addGroup 'Layout', ->
-	@add 'Layout_Sidenav_Footer', '', { type: 'string', public: true, i18nDescription: 'Layout_Sidenav_Footer_description' }
+	@add 'Layout_Sidenav_Footer', '<div><a href="https://github.com/RocketChat/Rocket.Chat" class="logo" target="_blank"> <img src="/images/logo/logo.svg?v=3" /></a><div class="github-tagline"><span class="octicon octicon-pencil" style="color: #994C00"></span> with <span class="octicon octicon-heart" style="color: red"></span> on <span class="octicon octicon-mark-github"></span></div></div>', { type: 'string', public: true, i18nDescription: 'Layout_Sidenav_Footer_description' }
 
 	@section 'Content', ->
 		@add 'Layout_Home_Title', 'Home', { type: 'string', public: true }
-		@add 'Layout_Home_Body', 'Welcome to Chat <br> Go to APP SETTINGS -> Layout to customize this intro.', { type: 'string', multiline: true, public: true }
+		@add 'Layout_Home_Body', 'Welcome to Rocket.Chat <br> Go to APP SETTINGS -> Layout to customize this intro.', { type: 'string', multiline: true, public: true }
 		@add 'Layout_Terms_of_Service', 'Terms of Service <br> Go to APP SETTINGS -> Layout to customize this page.', { type: 'string', multiline: true, public: true }
 		@add 'Layout_Privacy_Policy', 'Privacy Policy <br> Go to APP SETTINGS -> Layout to customize this page.', { type: 'string', multiline: true, public: true }
 
 	@section 'Login', ->
-		@add 'Layout_Login_Header', '', { type: 'string', multiline: true, public: true }
-		@add 'Layout_Login_Terms', '', { type: 'string', multiline: true, public: true }
+		@add 'Layout_Login_Header', '<a class="logo" href="/"><img src="/images/logo/logo.svg?v=3" /></a>', { type: 'string', multiline: true, public: true }
+		@add 'Layout_Login_Terms', 'By proceeding to create your account and use Rocket.Chat, you are agreeing to our <a href="/terms-of-service">Terms of Service</a> and <a href="/privacy-policy">Privacy Policy</a>. If you do not agree, you cannot use Rocket.Chat.', { type: 'string', multiline: true, public: true }
 
 
-RocketChat.settings.add 'Statistics_opt_out', false, { type: 'boolean', group: false }
+RocketChat.settings.addGroup 'Logs', ->
+	@add 'Log_Level', '0', { type: 'select', values: [ { key: '0', i18nLabel: '0_Errors_Only' }, { key: '1', i18nLabel: '1_Errors_and_Information' }, { key: '2', i18nLabel: '2_Erros_Information_and_Debug' } ] , public: true }
+	@add 'Log_Package', false, { type: 'boolean', public: true }
+	@add 'Log_File', false, { type: 'boolean', public: true }
+	@add 'Log_View_Limit', 1000, { type: 'int' }
+
 
 RocketChat.settings.init()
 
