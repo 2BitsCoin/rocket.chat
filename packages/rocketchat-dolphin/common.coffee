@@ -9,6 +9,12 @@ config =
 
 Dolphin = new CustomOAuth 'dolphin', config
 
+class DolphinOnCreateUser
+	constructor: (options, user) ->
+		if user.services?.dolphin?.NickName?
+			user.username = user.services.dolphin.NickName
+		return user
+
 if Meteor.isServer
 	Meteor.startup ->
 		RocketChat.models.Settings.find({ _id: 'API_Dolphin_URL' }).observe
@@ -18,6 +24,8 @@ if Meteor.isServer
 			changed: (record) ->
 				config.serverURL = RocketChat.settings.get 'API_Dolphin_URL'
 				Dolphin.configure config
+
+	RocketChat.callbacks.add 'beforeCreateUser', DolphinOnCreateUser, RocketChat.callbacks.priority.HIGH
 else
 	Meteor.startup ->
 		Tracker.autorun ->
