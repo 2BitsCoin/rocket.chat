@@ -1,3 +1,3 @@
 #!/bin/sh
-cd bundle/programs/server
+cd programs/server
 npm install
