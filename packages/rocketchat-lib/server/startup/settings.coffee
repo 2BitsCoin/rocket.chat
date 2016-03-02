@@ -151,6 +151,10 @@ RocketChat.settings.addGroup 'Push', ->
 		@add 'Push_gcm_api_key', '', { type: 'string' }
 		@add 'Push_gcm_project_number', '', { type: 'string', public: true }
 
+	@section 'Privacy', ->
+		@add 'Push_show_username_room', true, { type: 'boolean', public: true }
+		@add 'Push_show_message', true, { type: 'boolean', public: true }
+
 
 RocketChat.settings.addGroup 'Layout', ->
 	@add 'Layout_Sidenav_Footer', '', { type: 'string', public: true, i18nDescription: 'Layout_Sidenav_Footer_description' }
@@ -178,4 +182,3 @@ RocketChat.settings.init()
 # Remove runtime settings (non-persistent)
 Meteor.startup ->
 	RocketChat.models.Settings.update({ ts: { $lt: RocketChat.settings.ts }, persistent: { $ne: true } }, { $set: { hidden: true } }, { multi: true })
-	RocketChat.models.Settings.update({ ts: { $gte: RocketChat.settings.ts } }, { $unset: { hidden: 1 } }, { multi: true })

@@ -113,7 +113,6 @@ jparker:gravatar
 kadira:blaze-layout
 kadira:flow-router
 kenton:accounts-sandstorm
-kevohagan:sweetalert
 mizzao:autocomplete
 mizzao:timesync
 momentjs:moment
@@ -139,3 +138,4 @@ yasaricli:slugify
 yasinuslu:blaze-meta
 # sanjo:jasmine
 # velocity:html-reporter
+smoral:sweetalert
