@@ -16,6 +16,7 @@
 					{{#if lastLogin}} <p><i class="icon-calendar"></i> {{_ "Last_login"}}: {{lastLogin}}</p> {{/if}}
 					{{#if services.facebook.id}} <p><i class="icon-facebook"></i><a href="{{services.facebook.link}}" target="_blank">{{services.facebook.name}}</a></p> {{/if}}
 					{{#if services.dolphin.id}} <p><i class="icon-user"></i><a href="{{services.dolphin.profile_link}}" target="_blank">{{services.dolphin.profile_display_name}}</a></p> {{/if}}
+					{{#if services.trident.id}} <p><i class="icon-user"></i><a href="{{services.trident.profile_link}}" target="_blank">{{services.trident.profile_display_name}}</a></p> {{/if}}
 					{{#if services.github.id}} <p><i class="icon-github-circled"></i><a href="https://www.github.com/{{services.github.username}}" target="_blank">{{services.github.username}}</a></p> {{/if}}
 					{{#if services.gitlab.id}} <p><i class="icon-gitlab"></i>{{services.gitlab.username}}</p> {{/if}}
 					{{#if services.google.id}} <p><i class="icon-gplus"></i><a href="https://plus.google.com/{{services.google.id}}" target="_blank">{{services.google.name}}</a></p> {{/if}}

@@ -11,6 +11,11 @@
 			service: 'dolphin'
 			url: user.services.dolphin.picture
 
+	if user.services.trident?.id? and RocketChat.settings.get 'Accounts_OAuth_Trident'
+		avatars.push
+			service: 'trident'
+			url: user.services.trident.picture
+
 	if user.services.google?.picture? and user.services.google.picture isnt "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg" and RocketChat.settings.get 'Accounts_OAuth_Google'
 		avatars.push
 			service: 'google'

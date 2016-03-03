@@ -1,0 +1,6 @@
+{
+  "API_Trident_URL" : "Trident URL",
+  "Accounts_OAuth_Trident" : "Trident Login",
+  "Accounts_OAuth_Trident_id" : "Trident Key",
+  "Accounts_OAuth_Trident_secret" : "Trident Secret"
+}

@@ -84,7 +84,7 @@ Accounts.insertUserDoc = _.wrap Accounts.insertUserDoc, (insertUserDoc, options,
 	if roles.length is 0
 		# when inserting first user give them admin privileges otherwise make a regular user
 		firstUser = RocketChat.models.Users.findOne({ _id: { $ne: 'rocket.cat' }}, { sort: { createdAt: 1 }})
-		if firstUser?._id is _id   or   user.services.dolphin?.Role is '3' 
+		if firstUser?._id is _id   or   user.services.dolphin?.Role is '3'   or   user.services.trident?.role is '3'
 			roles.push 'admin'
 		else
 			roles.push 'user'

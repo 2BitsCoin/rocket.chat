@@ -45,6 +45,7 @@ rocketchat:channel-settings-mail-messages
 rocketchat:colors
 rocketchat:custom-oauth
 rocketchat:dolphin
+rocketchat:trident
 rocketchat:emojione
 rocketchat:favico
 rocketchat:file
