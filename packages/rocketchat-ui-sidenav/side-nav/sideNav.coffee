@@ -18,7 +18,7 @@ Template.sideNav.helpers
 			'<div style="height:50%; width:100%; position:relative;"><a style="display:block; text-align:center; width:100%; position:absolute; bottom:0; right:0; line-height:0;" href="' + sTridentUrl + '" target="_blank">' + t("Goto_main_site") + '</a></div>'
 			
 	showStarredRooms: ->
-		favoritesEnabled = !RocketChat.settings.get 'Disable_Favorite_Rooms'
+		favoritesEnabled = RocketChat.settings.get 'Favorite_Rooms'
 		hasFavoriteRoomOpened = ChatSubscription.findOne({ f: true, open: true })
 
 		return true if favoritesEnabled and hasFavoriteRoomOpened
@@ -27,10 +27,22 @@ Template.sideNav.helpers
 		return RocketChat.roomTypes.getTypes()
 
 	canShowRoomType: ->
-		return RocketChat.roomTypes.checkCondition(@)
+		userPref = Meteor.user()?.settings?.preferences?.mergeChannels
+		globalPref = RocketChat.settings.get('UI_Merge_Channels_Groups')
+		mergeChannels = if userPref? then userPref else globalPref
+		if mergeChannels
+			return RocketChat.roomTypes.checkCondition(@) and @template isnt 'privateGroups'
+		else
+			return RocketChat.roomTypes.checkCondition(@)
 
 	templateName: ->
-		return @template
+		userPref = Meteor.user()?.settings?.preferences?.mergeChannels
+		globalPref = RocketChat.settings.get('UI_Merge_Channels_Groups')
+		mergeChannels = if userPref? then userPref else globalPref
+		if mergeChannels
+			return if @template is 'channels' then 'combined' else @template
+		else
+			return @template
 
 Template.sideNav.events
 	'click .close-flex': ->
