@@ -1,3 +1,5 @@
+# Dolphin OAuth2
+
 config =
 	serverURL: ''
 	authorizePath: '/m/oauth2/auth/'
@@ -24,6 +26,18 @@ if Meteor.isServer
 			changed: (record) ->
 				config.serverURL = RocketChat.settings.get 'API_Dolphin_URL'
 				Dolphin.configure config
+
+	if RocketChat.settings.get 'API_Dolphin_URL'
+		data =
+			buttonLabelText: RocketChat.settings.get 'Accounts_OAuth_Dolphin_button_label_text'
+			buttonColor: RocketChat.settings.get 'Accounts_OAuth_Dolphin_button_color'
+			buttonLabelColor: RocketChat.settings.get 'Accounts_OAuth_Dolphin_button_label_color'
+			clientId: RocketChat.settings.get 'Accounts_OAuth_Dolphin_id'
+			secret: RocketChat.settings.get 'Accounts_OAuth_Dolphin_secret'
+			serverURL: RocketChat.settings.get 'API_Dolphin_URL'
+			loginStyle: RocketChat.settings.get 'Accounts_OAuth_Dolphin_login_style'
+
+		ServiceConfiguration.configurations.upsert {service: 'dolphin'}, $set: data
 
 	RocketChat.callbacks.add 'beforeCreateUser', DolphinOnCreateUser, RocketChat.callbacks.priority.HIGH
 else

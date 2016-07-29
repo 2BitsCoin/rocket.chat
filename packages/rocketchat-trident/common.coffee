@@ -1,3 +1,5 @@
+# Trident OAuth2
+
 config =
 	serverURL: ''
 	authorizePath: '/m/oauth2/auth/'
@@ -9,11 +11,11 @@ config =
 
 Trident = new CustomOAuth 'trident', config
 
-# class TridentOnCreateUser
-#	constructor: (options, user) ->
-#		if user.services?.trident?.name?
-#			user.username = user.services.trident.name
-#		return user
+class TridentOnCreateUser
+	constructor: (options, user) ->
+		if user.services?.trident?.name?
+			user.username = user.services.trident.name
+		return user
 
 if Meteor.isServer
 	Meteor.startup ->
@@ -25,10 +27,23 @@ if Meteor.isServer
 				config.serverURL = RocketChat.settings.get 'API_Trident_URL'
 				Trident.configure config
 
-	# RocketChat.callbacks.add 'beforeCreateUser', TridentOnCreateUser, RocketChat.callbacks.priority.HIGH
+		if RocketChat.settings.get 'API_Trident_URL'
+			data =
+				buttonLabelText: RocketChat.settings.get 'Accounts_OAuth_Trident_button_label_text'
+				buttonColor: RocketChat.settings.get 'Accounts_OAuth_Trident_button_color'
+				buttonLabelColor: RocketChat.settings.get 'Accounts_OAuth_Trident_button_label_color'
+				clientId: RocketChat.settings.get 'Accounts_OAuth_Trident_id'
+				secret: RocketChat.settings.get 'Accounts_OAuth_Trident_secret'
+				loginStyle: RocketChat.settings.get 'Accounts_OAuth_Trident_login_style'
+
+			ServiceConfiguration.configurations.upsert {service: 'trident'}, $set: data
+
+	RocketChat.callbacks.add 'beforeCreateUser', TridentOnCreateUser, RocketChat.callbacks.priority.HIGH
 else
 	Meteor.startup ->
 		Tracker.autorun ->
+
 			if RocketChat.settings.get 'API_Trident_URL'
 				config.serverURL = RocketChat.settings.get 'API_Trident_URL'
 				Trident.configure config
+
