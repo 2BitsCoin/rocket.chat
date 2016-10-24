@@ -5,6 +5,7 @@ config =
 	authorizePath: '/m/oauth2/auth/'
 	tokenPath: '/m/oauth2/token/'
 	identityPath: '/m/oauth2/api/me/'
+	scope: 'basic'
 	addAutopublishFields:
 		forLoggedInUser: ['services.trident']
 		forOtherUsers: ['services.trident.name']
