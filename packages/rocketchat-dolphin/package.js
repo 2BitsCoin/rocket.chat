@@ -1,7 +1,7 @@
 // Original: https://github.com/boonex/rocket.chat/blob/master/packages/rocketchat-dolphin/package.js
 Package.describe({
 	name: 'rocketchat:dolphin',
-	version: '0.0.2',
+	version: '0.0.3',
 	summary: 'RocketChat settings for Dolphin Oauth'
 });
 

@@ -20,15 +20,15 @@ class UnaOnCreateUser
 
 if Meteor.isServer
 	Meteor.startup ->
-		RocketChat.models.Settings.find({ _id: 'API_UNA_URL' }).observe
+		RocketChat.models.Settings.find({ _id: 'Accounts_OAuth_UNA_URL' }).observe
 			added: (record) ->
-				config.serverURL = RocketChat.settings.get 'API_UNA_URL'
+				config.serverURL = RocketChat.settings.get 'Accounts_OAuth_UNA_URL'
 				Una.configure config
 			changed: (record) ->
-				config.serverURL = RocketChat.settings.get 'API_UNA_URL'
+				config.serverURL = RocketChat.settings.get 'Accounts_OAuth_UNA_URL'
 				Una.configure config
 
-		if RocketChat.settings.get 'API_UNA_URL'
+		if RocketChat.settings.get 'Accounts_OAuth_UNA_URL'
 			data =
 				buttonLabelText: RocketChat.settings.get 'Accounts_OAuth_UNA_button_label_text'
 				buttonColor: RocketChat.settings.get 'Accounts_OAuth_UNA_button_color'
@@ -44,7 +44,7 @@ else
 	Meteor.startup ->
 		Tracker.autorun ->
 
-			if RocketChat.settings.get 'API_UNA_URL'
-				config.serverURL = RocketChat.settings.get 'API_UNA_URL'
+			if RocketChat.settings.get 'Accounts_OAuth_UNA_URL'
+				config.serverURL = RocketChat.settings.get 'Accounts_OAuth_UNA_URL'
 				Una.configure config
 
