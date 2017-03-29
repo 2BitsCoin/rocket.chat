@@ -12,6 +12,27 @@ function getAvatarSuggestionForUser(user) {
 		});
 	}
 
+        if (user.services.dolphin && user.services.dolphin.picture && RocketChat.settings.get('Accounts_OAuth_Dolphin')) {
+                avatars.push({
+                        service: 'dolphin',
+                        url: user.services.dolphin.picture
+                });
+        }
+
+        if (user.services.trident && user.services.trident.picture && RocketChat.settings.get('Accounts_OAuth_Trident')) {
+                avatars.push({
+                        service: 'trident',
+                        url: user.services.trident.picture
+                });
+        }
+
+        if (user.services.una && user.services.una.picture && RocketChat.settings.get('Accounts_OAuth_UNA')) {
+                avatars.push({
+                        service: 'una',
+                        url: user.services.una.picture
+                });
+        }
+
 	if (user.services.google && user.services.google.picture && user.services.google.picture !== 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg' && RocketChat.settings.get('Accounts_OAuth_Google')) {
 		avatars.push({
 			service: 'google',

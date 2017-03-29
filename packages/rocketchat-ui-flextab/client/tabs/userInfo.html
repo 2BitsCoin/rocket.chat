@@ -19,6 +19,11 @@
 						{{/each}}
 					</p>
 					{{#if utc}}<p class="secondary-font-color"><i class="icon-clock"></i>{{userTime}} (UTC {{utc}})</p>{{/if}}
+
+					{{#if services.dolphin.profile_display_name}} <p class="secondary-font-color"><i class="icon-user"></i><a href="{{services.dolphin.profile_link}}" target="_blank">{{services.dolphin.profile_display_name}}</a></p> {{/if}}
+					{{#if services.trident.profile_display_name}} <p class="secondary-font-color"><i class="icon-user"></i><a href="{{services.trident.profile_link}}" target="_blank">{{services.trident.profile_display_name}}</a></p> {{/if}}
+					{{#if services.una.profile_display_name}} <p class="secondary-font-color"><i class="icon-user"></i><a href="{{services.una.profile_link}}" target="_blank">{{services.una.profile_display_name}}</a></p> {{/if}}
+
 					{{#if hasPermission 'view-full-other-user-info'}}
 						{{#if hasEmails}}
 							{{#each emails}} <p class="secondary-font-color"><i class="icon-mail"></i> {{address}}{{#if verified}}&nbsp;<i class="icon-ok success-color"></i>{{/if}}</p> {{/each}}
@@ -28,9 +33,6 @@
 						{{/if}}
 						{{#if lastLogin}} <p class="secondary-font-color"><i class="icon-calendar"></i> {{_ "Created_at"}}: {{createdAt}}</p> {{/if}}
 						{{#if lastLogin}} <p class="secondary-font-color"><i class="icon-calendar"></i> {{_ "Last_login"}}: {{lastLogin}}</p> {{/if}}
-						{{#if services.dolphin.id}} <p class="secondary-font-color"><i class="icon-user"></i><a href="{{services.dolphin.profile_link}}" target="_blank">{{services.dolphin.profile_display_name}}</a></p> {{/if}}
-						{{#if services.trident.id}} <p class="secondary-font-color"><i class="icon-user"></i><a href="{{services.trident.profile_link}}" target="_blank">{{services.trident.profile_display_name}}</a></p> {{/if}}
-						{{#if services.una.id}} <p class="secondary-font-color"><i class="icon-user"></i><a href="{{services.una.profile_link}}" target="_blank">{{services.una.profile_display_name}}</a></p> {{/if}}
 						{{#if services.facebook.id}} <p class="secondary-font-color"><i class="icon-facebook"></i><a href="{{services.facebook.link}}" target="_blank">{{services.facebook.name}}</a></p> {{/if}}
 						{{#if services.github.id}} <p class="secondary-font-color"><i class="icon-github-circled"></i><a href="https://www.github.com/{{services.github.username}}" target="_blank">{{services.github.username}}</a></p> {{/if}}
 						{{#if services.gitlab.id}} <p class="secondary-font-color"><i class="icon-gitlab"></i>{{services.gitlab.username}}</p> {{/if}}

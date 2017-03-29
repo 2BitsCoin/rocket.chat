@@ -5,6 +5,10 @@ RocketChat.getFullUserData = function({userId, filter, limit}) {
 		username: 1,
 		status: 1,
 		utcOffset: 1,
+		'services.dolphin.profile_display_name': 1,
+		'services.dolphin.profile_link': 1,
+		'services.una.profile_display_name': 1,
+		'services.una.profile_link': 1,
 		type: 1,
 		active: 1
 	};
