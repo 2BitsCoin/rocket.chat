@@ -17,7 +17,7 @@ const Dolphin = new CustomOAuth('dolphin', config);
 
 function DolphinOnCreateUser(options, user) {
 	if (user && user.services && user.services.dolphin && user.services.dolphin.NickName) {
-		user.username = user.services.dolphin.NickName;
+		user.username = user.services.dolphin.NickName.replace(/[^A-Za-z0-9]/g, '.').replace(/\.+/g, '.').replace(/(^\.)|(\.$)/g, '');
 	}
 	return user;
 }

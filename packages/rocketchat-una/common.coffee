@@ -15,7 +15,7 @@ Una = new CustomOAuth 'una', config
 class UnaOnCreateUser
 	constructor: (options, user) ->
 		if user.services?.una?.profile_display_name?
-			user.username = user.services.una.profile_display_name
+			user.username = user.services.una.profile_display_name.replace(/[^A-Za-z0-9]/g, '.').replace(/\.+/g, '.').replace(/(^\.)|(\.$)/g, '')
 			user.name = user.services.una.profile_display_name
 		else if user.services?.una?.name?
 			user.username = user.services.una.name
