@@ -1,4 +1,5 @@
 RocketChat.settings.add 'Accounts_OAuth_UNA_URL', '', { type: 'string', group: 'OAuth', public: true, section: 'UNA', i18nLabel: 'URL' }
+RocketChat.settings.add 'Accounts_OAuth_UNA_Site_Name', 'UNA', { type: 'string', group: 'OAuth', public: true, section: 'UNA', i18nLabel: 'Site_Name' }
 RocketChat.settings.add 'Accounts_OAuth_UNA', false, { type: 'boolean', group: 'OAuth', section: 'UNA', i18nLabel: 'Accounts_OAuth_Custom_Enable' }
 RocketChat.settings.add 'Accounts_OAuth_UNA_id', '', { type: 'string', group: 'OAuth', section: 'UNA', i18nLabel: 'Accounts_OAuth_Custom_id' }
 RocketChat.settings.add 'Accounts_OAuth_UNA_secret', '', { type: 'string', group: 'OAuth', section: 'UNA', i18nLabel: 'Accounts_OAuth_Custom_Secret' }

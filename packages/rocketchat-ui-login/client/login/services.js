@@ -43,6 +43,11 @@ Template.loginServices.helpers({
 					serviceName = 'WordPress';
 					icon = service.service;
 					break;
+				case 'una':
+				case 'dolphin':
+					serviceName = service.buttonLabelText;
+					icon = service.service;
+					break;
 				default:
 					serviceName = _.capitalize(service.service);
 					icon = service.service;

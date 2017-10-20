@@ -44,7 +44,8 @@ if (Meteor.isServer) {
 			clientId: RocketChat.settings.get('Accounts_OAuth_Dolphin_id'),
 			secret: RocketChat.settings.get('Accounts_OAuth_Dolphin_secret'),
 			serverURL: RocketChat.settings.get('Accounts_OAuth_Dolphin_URL'),
-			loginStyle: RocketChat.settings.get('Accounts_OAuth_Dolphin_login_style')
+			loginStyle: RocketChat.settings.get('Accounts_OAuth_Dolphin_login_style'),
+			siteName: RocketChat.settings.get('Accounts_OAuth_Dolphin_Site_Name')
 		};
 
 		ServiceConfiguration.configurations.upsert({service: 'dolphin'}, {$set: data});

@@ -14,7 +14,10 @@ Una = new CustomOAuth 'una', config
 
 class UnaOnCreateUser
 	constructor: (options, user) ->
-		if user.services?.una?.name?
+		if user.services?.una?.profile_display_name?
+			user.username = user.services.una.profile_display_name
+			user.name = user.services.una.profile_display_name
+		else if user.services?.una?.name?
 			user.username = user.services.una.name
 		return user
 
@@ -36,6 +39,7 @@ if Meteor.isServer
 				clientId: RocketChat.settings.get 'Accounts_OAuth_UNA_id'
 				secret: RocketChat.settings.get 'Accounts_OAuth_UNA_secret'
 				loginStyle: RocketChat.settings.get 'Accounts_OAuth_UNA_login_style'
+				siteName: RocketChat.settings.get 'Accounts_OAuth_UNA_Site_Name'
 
 			ServiceConfiguration.configurations.upsert {service: 'una'}, $set: data
 

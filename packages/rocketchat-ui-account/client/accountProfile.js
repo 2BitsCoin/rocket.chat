@@ -50,10 +50,10 @@ Template.accountProfile.helpers({
 	},
 	services() {
 		const suggestions = Template.instance().suggestions.get();
-		return ['gravatar', 'facebook', 'google', 'github', 'gitlab', 'linkedIn', 'twitter']
+		return ['gravatar', 'facebook', 'google', 'github', 'gitlab', 'linkedIn', 'twitter', 'una', 'dolphin']
 			.map((service) => {
 				return {
-					name: service,
+					name: 'una' === service ? RocketChat.settings.get('Accounts_OAuth_UNA_Site_Name') : ('dolphin' === service ? RocketChat.settings.get('Accounts_OAuth_Dolphin_Site_Name') : service),
 					// TODO: improve this fix
 					service: !suggestions.avatars[service.toLowerCase()] ? RocketChat.settings.get(`Accounts_OAuth_${ _.capitalize(service.toLowerCase()) }`) : false,
 					suggestion: suggestions.avatars[service.toLowerCase()]
